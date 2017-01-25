@@ -1,4 +1,4 @@
-#meinsensor
+#Feinstaubwerte
 
 # Entwicklungsstand
 
@@ -6,15 +6,15 @@ Dieser Service befinded sich in Entwicklung.
 
 # Schnittstellen
 
-## /meinsensor/service/sensor/{id}
+## /feinstaubwerte/service/sensor/{id}
 
 nicht implementiert
 
-## /meinsensor/service/location/{lat}/{lng}
+## /feinstaubwerte/service/location/{lat}/{lng}
 
 nicht implementiert
 
-## /meinsensor/service/load
+## /feinstaubwerte/service/load
 
 Service zum Einlesen der Daten. Der Vorgang kann jederzeit wiederholt werden. 
 
@@ -45,8 +45,8 @@ context.xml
 
     <Context>
         <ResourceLink 
-             name="jdbc/meinsensor" 
-             global="jdbc/meinsensor"
+             name="jdbc/feinstaubwerte" 
+             global="jdbc/feinstaubwerte"
              type="javax.sql.DataSource" />
     </Context> 
 
@@ -54,7 +54,7 @@ server.xml
 
     <GlobalNamingResources>
         <Resource 
-            name="jdbc/wahlgebiet"
+            name="jdbc/feinstaubwerte"
             auth="Container"
             driverClassName="org.postgresql.Driver"
             maxTotal="25" 
@@ -62,7 +62,7 @@ server.xml
             username="username"
             password="password"
             type="javax.sql.DataSource"
-            url="jdbc:postgresql://localhost:5432/meinsensor"
+            url="jdbc:postgresql://localhost:5432/feinstaubwerte"
             validationQuery="select 1"/>
 
 Zu Testzwecken muss die Datei _src/test/resources/jndi.properties.template_ in _jndi.properties_ umbenannt und die Verbindungsparameter angepasst werden.
