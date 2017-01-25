@@ -22,19 +22,19 @@ Service zum Einlesen der Daten. Der Vorgang kann jederzeit wiederholt werden.
 
 ## DB User auf Postgres einrichten
 
-    sudo -u postgres createuser -P meinsensor
+    sudo -u postgres createuser -P feinstaubwerte
     
 ## Datenbank meinsensor anlegen
 
-    sudo -u postgres createdb -O meinsensor meinsensor
+    sudo -u postgres createdb -O feinstaubwerte feinstaubwerte
     
 ## Postgis topology
 
-    sudo -u postgres psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" meinsensor
+    sudo -u postgres psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" feinstaubwerte
 
 ## DB-Tabellen initial einrichten
 
-    psql -h localhost -U meinsensor -d meinsensor -a -f src/main/sql/meinsensor.init.sql
+    psql -h localhost -U feinstaubwerte -d feinstaubwerte -a -f src/main/sql/feinstaubwerte.init.sql
 
 ## Verbindungsparameter
 
