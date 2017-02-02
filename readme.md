@@ -20,7 +20,7 @@ Service zum Einlesen der Daten. Der Vorgang kann jederzeit wiederholt werden. Di
 
     curl https://www.madavi.de/sensor/feinstaub-map-sds/data.json > /var/cache/feinstaubwerte/feinstaubwerte-$(date +%Y%m%d_%H%M%S).json
 
-Durch Ausführen von load werden alle dort enthaltenen Dateien gelesen, in der Datenbank gespeichert und danach gelöscht. Die wiederholte Ausführung von load führt nicht zu einer zusätzlichen Belastung von www.madavi.de. In der Datenbank gespeicherte Daten werden 
+Durch Ausführen von load werden alle im Verzeichnis '/var/cache/feinstaubwerte' enthaltenen Dateien gelesen, in der Datenbank gespeichert und danach gelöscht. Die wiederholte Ausführung von load führt nicht zu einer zusätzlichen Belastung von www.madavi.de. In der Datenbank bereits vorhandene Daten werden nicht gelöscht.
 
 # Datenbank
 
