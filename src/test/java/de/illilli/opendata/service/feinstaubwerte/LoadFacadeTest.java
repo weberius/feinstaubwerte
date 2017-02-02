@@ -13,7 +13,7 @@ public class LoadFacadeTest {
 	public static void main(String[] args) throws IOException, ParseException, SQLException, NamingException {
 
 		ConnectionEnvironment.setUpConnectionForJndi();
-		new LoadFacade(LoadFacadeTest.class.getResourceAsStream("/sds-data.json"));
+		new LoadFacade();
 	}
 
 }

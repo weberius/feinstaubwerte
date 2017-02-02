@@ -39,13 +39,24 @@ public class Service {
 		return "{\"status\":\"alive\"}";
 	}
 
+	/**
+	 * <p>Dieser Service holt die Feinstaubwerte vom Server und persistiert sie in der Datenbank.</p>
+	 * <code>curl -X PUT http://localhost:8080/feinstaubwerte/service/load</code>
+     *
+	 * @param wahlgebiet
+	 * @return
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 * @throws ParseException
+	 */
 	@PUT
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/load")
-	public String load(@PathParam("wahlgebiet") String wahlgebiet)
+	public String load()
 			throws IOException, SQLException, NamingException, ParseException {
 
-		logger.info("/load/" + wahlgebiet + " called");
+		logger.info("/load called");
 		Facade facade = new LoadFacade();
 		return facade.getJson();
 	}

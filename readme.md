@@ -16,7 +16,11 @@ nicht implementiert
 
 ## /feinstaubwerte/service/load
 
-Service zum Einlesen der Daten. Der Vorgang kann jederzeit wiederholt werden. 
+Service zum Einlesen der Daten. Der Vorgang kann jederzeit wiederholt werden. Die Daten werden aus dem Filesystem gelesen. Gemäß [https://de.wikipedia.org/wiki/Filesystem_Hierarchy_Standard](Filesystem Hierarchy Standard) werden die Daten aus dem Verzeichnis /var/cache/feinstaubwerte gelesen. Dabei ist das System auf dem die Anwendung installiert ist, dafür zuständig die Daten dort zur Verfügung zu stehen. Dies ist z.B. über curl möglich:
+
+    curl https://www.madavi.de/sensor/feinstaub-map-sds/data.json > /var/cache/feinstaubwerte/feinstaubwerte-$(date +%Y%m%d_%H%M%S).json
+
+Durch Ausführen von load werden alle dort enthaltenen Dateien gelesen, in der Datenbank gespeichert und danach gelöscht. Die wiederholte Ausführung von load führt nicht zu einer zusätzlichen Belastung von www.madavi.de. In der Datenbank gespeicherte Daten werden 
 
 # Datenbank
 
@@ -66,7 +70,6 @@ server.xml
             validationQuery="select 1"/>
 
 Zu Testzwecken muss die Datei _src/test/resources/jndi.properties.template_ in _jndi.properties_ umbenannt und die Verbindungsparameter angepasst werden.
-
 
 # Installation
 
