@@ -18,6 +18,7 @@ import de.illilli.opendata.service.feinstaubwerte.model.SensorData;
 public class LoadMeasurementData {
 
 	private static final Logger logger = Logger.getLogger(LoadMeasurementData.class);
+	public static int counter = 0;
 
 	public LoadMeasurementData(Measurement measurement)
 			throws SQLException, NamingException, ParseException, IOException {
@@ -98,7 +99,6 @@ public class LoadMeasurementData {
 				new InsertDao(new Measurement2SensorData(measurementId, sensorDataId), conn).execute();
 			}
 		}
-
 		// close connection
 		conn.close();
 
