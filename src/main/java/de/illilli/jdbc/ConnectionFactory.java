@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * 
  * <pre>
  * &lt;Resource 
- * 	name="jdbc/wahlergebnis" 
+ * 	name="jdbc/feinstaubwerte" 
  * 	auth="Container" 
  * 	type="javax.sql.DataSource"
  * 	username="username" 
@@ -37,7 +37,7 @@ public class ConnectionFactory {
 	public static Connection getConnection() throws SQLException, NamingException {
 		Context initContext = new InitialContext();
 		Context envContext = (Context) initContext.lookup("java:/comp/env");
-		DataSource ds = (DataSource) envContext.lookup("jdbc/meinsensor");
+		DataSource ds = (DataSource) envContext.lookup("jdbc/feinstaubwerte");
 		Connection conn = ds.getConnection();
 		return conn;
 	}

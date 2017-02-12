@@ -1,6 +1,7 @@
 package de.illilli.opendata.service.feinstaubwerte;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -39,10 +40,49 @@ public class Service {
 		return "{\"status\":\"alive\"}";
 	}
 
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/sensordata/{number}")
+	public String getSensordataById(@PathParam("number") int number) throws UnsupportedEncodingException {
+
+		logger.info("/feinstaubwerte/service/sensordata/" + number);
+		request.setCharacterEncoding(Config.getProperty("encoding"));
+		response.setCharacterEncoding(Config.getProperty("encoding"));
+		return "";
+	}
+
 	/**
-	 * <p>Dieser Service holt die Feinstaubwerte vom Server und persistiert sie in der Datenbank.</p>
+	 * Beispiel: <a href=
+	 * "http://localhost:8080/feinstaubwerte/service/sensordata/7.0/50.959">
+	 * /feinstaubwerte/service/sensordata/<lng>/<lat></a>
+	 * 
+	 * @param lng
+	 * @param lat
+	 * @return
+	 * @throws SQLException
+	 * @throws NamingException
+	 * @throws IOException
+	 */
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/sensordata/{lng}/{lat}")
+	public String getSensordataByLngLat(@PathParam("lng") double lng, @PathParam("lat") double lat)
+			throws SQLException, NamingException, IOException {
+
+		logger.info("/feinstaubwerte/serive/sensordata/" + lng + "/" + lat + " called");
+		request.setCharacterEncoding(Config.getProperty("encoding"));
+		response.setCharacterEncoding(Config.getProperty("encoding"));
+		return new SensorDataByLngLatFacade(lng, lat).getJson();
+
+	}
+
+	/**
+	 * <p>
+	 * Dieser Service holt die Feinstaubwerte vom Server und persistiert sie in
+	 * der Datenbank.
+	 * </p>
 	 * <code>curl -X PUT http://localhost:8080/feinstaubwerte/service/load</code>
-     *
+	 *
 	 * @param wahlgebiet
 	 * @return
 	 * @throws IOException
@@ -53,8 +93,7 @@ public class Service {
 	@PUT
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/load")
-	public String load()
-			throws IOException, SQLException, NamingException, ParseException {
+	public String load() throws IOException, SQLException, NamingException, ParseException {
 
 		logger.info("/load called");
 		Facade facade = new LoadFacade();

@@ -56,7 +56,7 @@ public class ConnectionEnvironment {
 			ds.setUser(properties.getProperty("user"));
 			ds.setPassword(properties.getProperty("password"));
 
-			ic.bind("java:/comp/env/jdbc/meinsensor", ds);
+			ic.bind("java:/comp/env/jdbc/feinstaubwerte", ds);
 
 		} catch (NamingException ex) {
 			ex.printStackTrace();
