@@ -10,6 +10,7 @@ public class DTO2SensorDataByLocation {
 
 	public DTO2SensorDataByLocation(List<SensorDataByLocationIdDTO> dtoList) {
 		for (SensorDataByLocationIdDTO dto : dtoList) {
+			data.locationid = dto.getLocationid();
 			data.geojson = dto.getGeojson();
 			data.distance = dto.getDistance();
 			data.datum = dto.getDatum();
