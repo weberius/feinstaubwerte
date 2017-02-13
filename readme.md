@@ -12,7 +12,31 @@ nicht implementiert
 
 ## /feinstaubwerte/service/location/{lat}/{lng}
 
-Mit dieser Schnittstelle wird der letzte erfasste Messwert der nächsten Messstation im Umkreis von 500 m zur lat-lng Position zur Verfügung gestellt.
+Mit dieser Schnittstelle wird der letzte erfasste Messwert der nächsten Messstation im Umkreis von 500 m zur lat-lng Position zur Verfügung gestellt. Die Schnittstelle antwortet mit folgender Datenstruktur:
+
+    {
+      "locationid":110,
+      "geojson":"{\"type\":\"Point\",\"coordinates\":[7,50.961]}",
+      "distance":222.495021748,
+      "datum":"Feb 13, 2017 3:58:43 AM",
+      "temperature":1.4,
+      "humidity":91.3,
+      "p1":89.9,
+      "p2":33.25
+    }
+
+  
+| Feld  | Beschreibung  |
+|-------|---------------|
+| locationid  | id der location an der gemessen wurde  |
+| geojson  | die Position der Messung im geojson Format  |
+| distance  | Entfernung der Messstation zur abgefragten Position in metern |
+| datum  | Datum der Messung in GMT  |
+| temperature  | Temperatur in Grad Celsius  |
+| humidity  | Luftfeuchte  |
+| p1  | PM 10 Wert  |
+| p2  | PM 2.5 Wert  |
+
 
 Beispiel: [/feinstaubwerte/service/sensordata/7.0/50.959](http://tom.cologne.codefor.de/feinstaubwerte/service/sensordata/7.0/50.959)
 
