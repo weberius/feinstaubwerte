@@ -12,7 +12,9 @@ nicht implementiert
 
 ## /feinstaubwerte/service/location/{lat}/{lng}
 
-nicht implementiert
+Mit dieser Schnittstelle wird der letzte erfasste Messwert der nächsten Messstation im Umkreis von 500 m zur lat-lng Position zur Verfügung gestellt.
+
+Beispiel: [/feinstaubwerte/service/sensordata/7.0/50.959](http://tom.cologne.codefor.de/feinstaubwerte/service/sensordata/7.0/50.959)
 
 ## /feinstaubwerte/service/load
 
