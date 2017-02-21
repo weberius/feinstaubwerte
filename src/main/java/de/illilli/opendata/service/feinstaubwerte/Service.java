@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Locale;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -69,9 +70,13 @@ public class Service {
 	public String getSensordataByLngLat(@PathParam("lng") double lng, @PathParam("lat") double lat)
 			throws SQLException, NamingException, IOException {
 
-		logger.info("/feinstaubwerte/serive/sensordata/" + lng + "/" + lat + " called");
+		Locale userPreferredLocale = request.getLocale();
+
+		logger.info("/feinstaubwerte/service/sensordata/" + lng + "/" + lat + " called");
+		logger.info(userPreferredLocale.toString());
 		request.setCharacterEncoding(Config.getProperty("encoding"));
 		response.setCharacterEncoding(Config.getProperty("encoding"));
+
 		return new SensorDataByLngLatFacade(lng, lat).getJson();
 
 	}

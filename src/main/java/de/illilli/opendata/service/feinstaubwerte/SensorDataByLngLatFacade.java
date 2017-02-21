@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 
 import javax.naming.NamingException;
 
@@ -21,6 +22,7 @@ import de.illilli.opendata.service.feinstaubwerte.model.SensorDataByLocation;
 public class SensorDataByLngLatFacade implements Facade {
 
 	private SensorDataByLocation data = new SensorDataByLocation();
+	private Locale locale = Locale.GERMAN;
 
 	public SensorDataByLngLatFacade(double lng, double lat) throws SQLException, NamingException, IOException {
 
@@ -30,9 +32,18 @@ public class SensorDataByLngLatFacade implements Facade {
 		data = new DTO2SensorDataByLocation(dtoList).getData();
 	}
 
+	public SensorDataByLngLatFacade(double lng, double lat, Locale locale)
+			throws SQLException, NamingException, IOException {
+
+		Connection connection = ConnectionFactory.getConnection();
+		Select<SensorDataByLocationIdDTO> select = new SelectLastSensorDataByLocation(lng, lat);
+		List<SensorDataByLocationIdDTO> dtoList = new SelectListDao<>(select, connection).execute();
+		data = new DTO2SensorDataByLocation(dtoList).getData();
+	}
+
 	@Override
 	public String getJson() {
-		return new Gson().toJson(this.data);
+		return new Gson().toJson(new SensorDataByLocationFormatted(data, locale));
 	}
 
 }
