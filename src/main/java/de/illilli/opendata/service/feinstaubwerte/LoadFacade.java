@@ -38,10 +38,7 @@ public class LoadFacade implements Facade {
 				InputStream inputStream = new FileInputStream(file);
 				AskFor<Measurement[]> askfor = new AskForFeinstaubdaten(inputStream);
 				inputStream.close();
-				// load data only, if available
-				if (askfor.getData() != null && askfor.getData().length > 0) {
-					loadData(askfor.getData());
-				}
+				loadData(askfor.getData());
 				boolean fileDeleted = file.delete();
 				if (fileDeleted) {
 					logger.info("'" + file.getAbsolutePath() + "' deleted");
