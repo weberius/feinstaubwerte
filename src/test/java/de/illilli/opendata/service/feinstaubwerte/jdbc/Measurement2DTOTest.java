@@ -8,8 +8,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import de.illilli.opendata.service.Config;
-import de.illilli.opendata.service.feinstaubwerte.jdbc.Measurement2DTO;
-import de.illilli.opendata.service.feinstaubwerte.jdbc.MeasurementDTO;
 import de.illilli.opendata.service.feinstaubwerte.model.Measurement;
 
 public class Measurement2DTOTest {
@@ -20,7 +18,7 @@ public class Measurement2DTOTest {
 	public void testTimestampToDate() throws ParseException {
 
 		MeasurementDTO dto = new Measurement2DTO(Measurement2DTOTest.getMeasurementForTest());
-		long time = new SimpleDateFormat(timestampFormat).parse("2017-01-16T14:41:01").getTime();
+		long time = new SimpleDateFormat(timestampFormat).parse("2017-01-16T15:41:01").getTime();
 		Timestamp expected = new Timestamp(time);
 		Timestamp actual = dto.getDatum();
 		Assert.assertEquals(expected, actual);
