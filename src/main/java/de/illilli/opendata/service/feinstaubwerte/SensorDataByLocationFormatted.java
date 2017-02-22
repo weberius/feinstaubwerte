@@ -5,9 +5,13 @@ import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import org.apache.log4j.Logger;
+
 import de.illilli.opendata.service.feinstaubwerte.model.SensorDataByLocation;
 
 public class SensorDataByLocationFormatted {
+
+	private static final Logger logger = Logger.getLogger(SensorDataByLocationFormatted.class);
 
 	public String locationid;
 	public String distance;
@@ -20,7 +24,8 @@ public class SensorDataByLocationFormatted {
 	public SensorDataByLocationFormatted(SensorDataByLocation data, Locale locale) {
 		this.locationid = data.locationid + "";
 		this.distance = Double.toString(round(data.distance, 1));
-		this.datum = new SimpleDateFormat("dd.MM.yyyy hh:mm", locale).format(data.datum);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm", locale);
+		this.datum = sdf.format(data.datum);
 		this.temperature = Double.toString(round(data.temperature, 1));
 		this.humidity = Double.toString(round(data.humidity, 1));
 		this.p1 = Double.toString(round(data.p1, 1));
