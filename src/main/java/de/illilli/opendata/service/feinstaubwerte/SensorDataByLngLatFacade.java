@@ -29,6 +29,7 @@ public class SensorDataByLngLatFacade implements Facade {
 		Connection connection = ConnectionFactory.getConnection();
 		Select<SensorDataByLocationIdDTO> select = new SelectLastSensorDataByLocation(lng, lat);
 		List<SensorDataByLocationIdDTO> dtoList = new SelectListDao<>(select, connection).execute();
+		connection.close();
 		data = new DTO2SensorDataByLocation(dtoList).getData();
 	}
 
@@ -38,6 +39,7 @@ public class SensorDataByLngLatFacade implements Facade {
 		Connection connection = ConnectionFactory.getConnection();
 		Select<SensorDataByLocationIdDTO> select = new SelectLastSensorDataByLocation(lng, lat);
 		List<SensorDataByLocationIdDTO> dtoList = new SelectListDao<>(select, connection).execute();
+		connection.close();
 		data = new DTO2SensorDataByLocation(dtoList).getData();
 	}
 
