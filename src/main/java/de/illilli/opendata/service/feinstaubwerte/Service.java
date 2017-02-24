@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
+
+import com.google.gson.Gson;
 
 import de.illilli.opendata.service.Config;
 import de.illilli.opendata.service.Facade;
@@ -80,9 +85,11 @@ public class Service {
 		if (hasKey) {
 			sensordata = new SensorDataByLngLatFacade(lng, lat, userPreferredLocale).getJson();
 			logger.info("/feinstaubwerte/service/sensordata/" + lng + "/" + lat + "?key called");
+			logger.info("headerInfo: " + new Gson().toJson(getHeadersInfo()));
 		} else {
 			sensordata = Config.getProperty("default.return.value");
 			logger.info("/feinstaubwerte/service/sensordata/" + lng + "/" + lat + " called");
+			logger.info("headerInfo: " + new Gson().toJson(getHeadersInfo()));
 		}
 		return sensordata;
 	}
@@ -111,4 +118,18 @@ public class Service {
 		return facade.getJson();
 	}
 
+	// get request headers
+	private Map<String, String> getHeadersInfo() {
+
+		Map<String, String> map = new HashMap<String, String>();
+
+		Enumeration<String> headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String key = headerNames.nextElement();
+			String value = request.getHeader(key);
+			map.put(key, value);
+		}
+
+		return map;
+	}
 }
