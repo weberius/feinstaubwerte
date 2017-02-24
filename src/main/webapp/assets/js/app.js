@@ -1,10 +1,44 @@
-var interval = 1000 * 60; // where X is your every X minutes
+var interval = 1000 * 60 * 60; // where X is your every X minutes
+var lonlat;
 
-var url = 'https://tom.cologne.codefor.de/feinstaubwerte/service/sensordata/7.0/50.959';
+var url = 'https://tom.cologne.codefor.de/feinstaubwerte/service/sensordata/';
 var data;
 var success;
 
-var dataCall = function dataCall() {
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+	lonlat = position.coords.longitude + "/" + position.coords.latitude;
+	url = url + lonlat;
+	dataCall();
+    console.log(url);
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+}
+
+function dataCall() {
+		
 	$.ajax({
 		  dataType: "json",
 		  url: url,
@@ -21,7 +55,7 @@ var dataCall = function dataCall() {
 		});
 	};
 	
-dataCall();
+getLocation();
 
-setInterval(dataCall, interval);
+// setInterval(dataCall, interval);
 

@@ -70,15 +70,21 @@ public class Service {
 	public String getSensordataByLngLat(@PathParam("lng") double lng, @PathParam("lat") double lat)
 			throws SQLException, NamingException, IOException {
 
+		String sensordata = null;
 		Locale userPreferredLocale = request.getLocale();
 
-		logger.info("/feinstaubwerte/service/sensordata/" + lng + "/" + lat + " called");
-		logger.info(userPreferredLocale.toString());
 		request.setCharacterEncoding(Config.getProperty("encoding"));
 		response.setCharacterEncoding(Config.getProperty("encoding"));
 
-		return new SensorDataByLngLatFacade(lng, lat).getJson();
-
+		boolean hasKey = request.getParameter("key") != null;
+		if (hasKey) {
+			sensordata = new SensorDataByLngLatFacade(lng, lat, userPreferredLocale).getJson();
+			logger.info("/feinstaubwerte/service/sensordata/" + lng + "/" + lat + "?key called");
+		} else {
+			sensordata = Config.getProperty("default.return.value");
+			logger.info("/feinstaubwerte/service/sensordata/" + lng + "/" + lat + " called");
+		}
+		return sensordata;
 	}
 
 	/**
