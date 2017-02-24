@@ -81,16 +81,10 @@ public class Service {
 		request.setCharacterEncoding(Config.getProperty("encoding"));
 		response.setCharacterEncoding(Config.getProperty("encoding"));
 
-		boolean hasKey = request.getParameter("key") != null;
-		if (hasKey) {
-			sensordata = new SensorDataByLngLatFacade(lng, lat, userPreferredLocale).getJson();
-			logger.info("/feinstaubwerte/service/sensordata/" + lng + "/" + lat + "?key called");
-			logger.info("headerInfo: " + new Gson().toJson(getHeadersInfo()));
-		} else {
-			sensordata = Config.getProperty("default.return.value");
-			logger.info("/feinstaubwerte/service/sensordata/" + lng + "/" + lat + " called");
-			logger.info("headerInfo: " + new Gson().toJson(getHeadersInfo()));
-		}
+		sensordata = new SensorDataByLngLatFacade(lng, lat, userPreferredLocale).getJson();
+		logger.info("/feinstaubwerte/service/sensordata/" + lng + "/" + lat + "?key called");
+		logger.info("headerInfo: " + new Gson().toJson(getHeadersInfo()));
+
 		return sensordata;
 	}
 
