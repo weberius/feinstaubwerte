@@ -24,7 +24,7 @@ public class SensorDataByLocationFormatted {
 	public SensorDataByLocationFormatted(SensorDataByLocation data, Locale locale) {
 		this.locationid = data.locationid + "";
 		this.distance = Double.toString(round(data.distance, 1));
-		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm", locale);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm", locale);
 		this.datum = sdf.format(data.datum);
 		this.temperature = Double.toString(round(data.temperature, 1));
 		this.humidity = Double.toString(round(data.humidity, 1));
