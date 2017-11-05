@@ -18,7 +18,7 @@ public class Measurement2DTOTest {
 	public void testTimestampToDate() throws ParseException {
 
 		MeasurementDTO dto = new Measurement2DTO(Measurement2DTOTest.getMeasurementForTest());
-		long time = new SimpleDateFormat(timestampFormat).parse("2017-01-16T15:41:01").getTime();
+		long time = new SimpleDateFormat(timestampFormat).parse("2017-01-16 15:41:01").getTime();
 		Timestamp expected = new Timestamp(time);
 		Timestamp actual = dto.getDatum();
 		Assert.assertEquals(expected, actual);
@@ -28,7 +28,7 @@ public class Measurement2DTOTest {
 	static Measurement getMeasurementForTest() {
 		Measurement measurement = new Measurement();
 		measurement.id = 101;
-		measurement.timestamp = "2017-01-16T14:41:01";
+		measurement.timestamp = "2017-01-16 14:41:01";
 		return measurement;
 	}
 
