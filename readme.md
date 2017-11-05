@@ -50,6 +50,12 @@ Durch Ausführen von load werden alle im Verzeichnis '/var/cache/feinstaubwerte'
 
 # Datenbank
 
+## Postgres und Postgis installieren
+
+    sudo apt-get install -y postgresql postgresql-contrib
+
+    sudo apt-get install -y postgis postgresql-9.3-postgis-2.1
+
 ## DB User auf Postgres einrichten
 
     sudo -u postgres createuser -P feinstaubwerte
